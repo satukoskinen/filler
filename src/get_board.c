@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 20:51:35 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/06 23:41:17 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/07 09:26:53 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,32 @@
 #include "libft.h"
 #include <stdlib.h>
 
+static int	add_board_row(char *map, size_t row, size_t width)
+{
+	char	*line;
+	size_t	offset;
+	size_t	j;
+
+	if (get_next_line(0, &line) != 1)
+		return (0);
+	offset = 0;
+	while (!ft_strchr(".oOxX", line[offset]))
+		offset++;
+	j = 0;
+	while (j < width)
+	{
+		if (!line[offset + j])
+			return (0);
+		map[row * width + j] = line[offset + j];
+		j++;
+	}
+	free(line);
+	return (1);
+}
+
 int			get_board(char *dimension_line, t_board *board)
 {
 	size_t	i;
-	size_t	j;
-	size_t	offset;
 	char	*line;
 
 	get_dimensions(dimension_line, &board->height, &board->width);
@@ -34,23 +55,13 @@ int			get_board(char *dimension_line, t_board *board)
 	i = 0;
 	while (i < board->height)
 	{
-		if (get_next_line(0, &line) != 1)
+		if (!add_board_row(board->map, i, board->width))
 		{
 			ft_strdel(&board->map);
 			return (0);
 		}
-		offset = 0;
-		while (!ft_strchr(".oOxX", line[offset]))
-			offset++;
-		j = 0;
-		while (j < board->width)
-		{
-			board->map[i * board->width + j] = line[offset + j];
-			j++;
-		}
-		free(line);
 		i++;
 	}
-	board->map[i * j] = '\0';
+	board->map[board->height * board->height] = '\0';
 	return (1);
 }

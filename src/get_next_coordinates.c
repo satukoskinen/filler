@@ -6,19 +6,19 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 22:39:58 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/07 01:32:10 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/07 10:04:11 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
 
-int		valid_piece_coordinates(size_t y, size_t x, t_data data)
+static int	valid_piece_coordinates(size_t y, size_t x, t_data data)
 {
 	size_t	i;
 	size_t	j;
 	int		overlap;
-	char	c;
+	char	cell;
 
 	overlap = 0;
 	i = 0;
@@ -31,10 +31,9 @@ int		valid_piece_coordinates(size_t y, size_t x, t_data data)
 			{
 				if (y + i >= data.board.height || x + j >= data.board.width)
 					return (0);
-				c = data.board.map[(y + i) * data.board.width + x + j];
-				if (ft_tolower(c) == data.player_piece)
-					overlap++;
-				if (overlap == 2 || ft_tolower(c) == data.opponent_piece)
+				cell = data.board.map[(y + i) * data.board.width + x + j];
+				overlap += (ft_tolower(cell) == data.player_piece);
+				if (overlap == 2 || ft_tolower(cell) == data.opponent_piece)
 					return (0);
 			}
 			j++;
@@ -44,7 +43,7 @@ int		valid_piece_coordinates(size_t y, size_t x, t_data data)
 	return (overlap);
 }
 
-void	write_next_coordinates(t_data data)
+void		write_next_coordinates(t_data data)
 {
 	size_t	y;
 	size_t	x;
