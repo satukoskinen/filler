@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 20:22:31 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/07 10:26:59 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/07 11:00:59 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 # define FILLER_H
 
 # include <string.h>
+
+typedef struct	s_2d_index
+{
+	size_t		y;
+	size_t		x;
+}				t_2d_index;
 
 typedef struct	s_board
 {
