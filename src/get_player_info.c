@@ -1,0 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_player_info.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/03/06 20:52:30 by skoskine          #+#    #+#             */
+/*   Updated: 2021/03/06 22:37:07 by skoskine         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+#include <stdlib.h>
+
+int			get_player_info(char *player_piece, char *opponent_piece)
+{
+	char	*line;
+	size_t	i;
+
+	if (get_next_line(0, &line) == -1)
+		return (0);
+	i = 0;
+	while (line[i] != '1' && line[i] != '2' && line[i])
+		i++;
+	if (line[i] == '1')
+		*player_piece = 'o';
+	else if (line[i] == '2')
+		*player_piece = 'x';
+	else
+		*player_piece = 0;
+	free(line);
+	*opponent_piece = *player_piece == 'o' ? 'x' : 'o';
+	if (*player_piece == 0)
+		return (0);
+	else
+		return (1);
+}
