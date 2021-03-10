@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 20:51:35 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/07 09:26:53 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/10 08:09:28 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,6 @@ int			get_board(char *dimension_line, t_board *board)
 		}
 		i++;
 	}
-	board->map[board->height * board->height] = '\0';
+	board->map[board->height * board->width] = '\0';
 	return (1);
 }
