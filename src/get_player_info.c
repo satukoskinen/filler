@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 20:52:30 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/06 22:37:07 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/07 16:31:57 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 int			get_player_info(char *player_piece, char *opponent_piece)
 {
 	char	*line;
-	size_t	i;
+	int		i;
 
 	if (get_next_line(0, &line) == -1)
 		return (0);

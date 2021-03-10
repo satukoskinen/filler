@@ -6,15 +6,15 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 21:46:12 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/07 01:44:54 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/07 16:32:27 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void		get_dimensions(char *str, size_t *height, size_t *width)
+void		get_dimensions(char *str, int *height, int *width)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
 	while (!ft_isdigit(str[i]) && str[i])
@@ -25,9 +25,9 @@ void		get_dimensions(char *str, size_t *height, size_t *width)
 	*width = ft_atoi(&str[i]);
 }
 
-int			row_is_empty(char *map, size_t row, size_t width)
+int			row_is_empty(char *map, int row, int width)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
 	while (i < width)
@@ -39,9 +39,9 @@ int			row_is_empty(char *map, size_t row, size_t width)
 	return (1);
 }
 
-int			col_is_empty(char *map, size_t col, size_t width, size_t height)
+int			col_is_empty(char *map, int col, int width, int height)
 {
-	size_t	i;
+	int		i;
 
 	i = 0;
 	while (i < height)

@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 20:49:53 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/07 09:16:19 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/10 08:07:00 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 static void	get_shape_dimensions(t_piece *piece)
 {
-	size_t	i;
-	size_t	height;
-	size_t	width;
+	int		i;
+	int		height;
+	int		width;
 
 	height = 0;
 	width = 0;
@@ -40,10 +40,10 @@ static void	get_shape_dimensions(t_piece *piece)
 	piece->shape_width = width;
 }
 
-static int	add_piece_row(char *map, size_t row, size_t width)
+static int	add_piece_row(char *map, int 	row, int 	width)
 {
 	char	*line;
-	size_t	j;
+	int		j;
 
 	if (get_next_line(0, &line) != 1)
 		return (0);
@@ -61,8 +61,8 @@ static int	add_piece_row(char *map, size_t row, size_t width)
 
 int			get_piece(t_piece *piece)
 {
-	size_t	i;
 	char	*line;
+	int		i;
 
 	piece->map = NULL;
 	if (get_next_line(0, &line) != 1)

@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 20:51:35 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/07 09:26:53 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/10 08:06:48 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static int	add_board_row(char *map, size_t row, size_t width)
+static int	add_board_row(char *map, int row, int width)
 {
 	char	*line;
-	size_t	offset;
-	size_t	j;
+	int		offset;
+	int		j;
 
 	if (get_next_line(0, &line) != 1)
 		return (0);
@@ -39,8 +39,8 @@ static int	add_board_row(char *map, size_t row, size_t width)
 
 int			get_board(char *dimension_line, t_board *board)
 {
-	size_t	i;
 	char	*line;
+	int		i;
 
 	get_dimensions(dimension_line, &board->height, &board->width);
 	if (!(board->map = (char*)malloc(sizeof(char) *
@@ -62,6 +62,6 @@ int			get_board(char *dimension_line, t_board *board)
 		}
 		i++;
 	}
-	board->map[board->height * board->height] = '\0';
+	board->map[board->height * board->width] = '\0';
 	return (1);
 }

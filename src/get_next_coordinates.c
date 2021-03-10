@@ -6,14 +6,14 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 22:39:58 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/07 11:00:56 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/09 22:20:39 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
 
-static int	valid_piece_coordinates(size_t y, size_t x, t_data data)
+static int	valid_piece_coordinates(int y, int x, t_data data)
 {
 	t_2d_index	i;
 	int			overlap;
@@ -31,7 +31,8 @@ static int	valid_piece_coordinates(size_t y, size_t x, t_data data)
 				if (y + i.y >= data.board.height || x + i.x >= data.board.width)
 					return (0);
 				cell = data.board.map[(y + i.y) * data.board.width + x + i.x];
-				overlap += (ft_tolower(cell) == data.player_piece);
+				if (ft_tolower(cell) == data.player_piece)
+					overlap++;
 				if (overlap == 2 || ft_tolower(cell) == data.opponent_piece)
 					return (0);
 			}
@@ -39,31 +40,39 @@ static int	valid_piece_coordinates(size_t y, size_t x, t_data data)
 		}
 		i.y++;
 	}
-	return (overlap);
+	return (overlap == 1 ? 1 : 0);
 }
 
-void		write_next_coordinates(t_data data)
+static void	write_coordinates(size_t y, size_t x)
 {
-	size_t	y;
-	size_t	x;
+	ft_putnbr(y);
+	ft_putstr(" ");
+	ft_putnbr(x);
+	ft_putstr("\n");
+} 
 
-	y = 0;
-	while (y < data.board.height)
+void		get_next_coordinates(t_data data)
+{
+	t_2d_index	piece;
+	t_2d_index	next_piece;
+//	t_2d_index	opponent_piece;
+
+	next_piece.y = 0;
+	next_piece.x = 0;
+	piece.y = 0;
+	while (piece.y < data.board.height)
 	{
-		x = 0;
-		while (x < data.board.width)
+		piece.x = 0;
+		while (piece.x < data.board.width)
 		{
-			if (valid_piece_coordinates(y, x, data))
+			if (valid_piece_coordinates(piece.y, piece.x, data))
 			{
-				ft_putnbr(y);
-				ft_putstr(" ");
-				ft_putnbr(x);
-				ft_putstr("\n");
+				write_coordinates(piece.y, piece.x);
 				return ;
 			}
-			x++;
+			piece.x++;
 		}
-		y++;
+		piece.y++;
 	}
-	ft_putstr("0 0\n");
+	write_coordinates(next_piece.y, next_piece.x);
 }

@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 20:22:31 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/07 11:00:59 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/07 16:30:35 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,23 @@
 
 typedef struct	s_2d_index
 {
-	size_t		y;
-	size_t		x;
+	int			y;
+	int			x;
 }				t_2d_index;
 
 typedef struct	s_board
 {
-	size_t		width;
-	size_t		height;
+	int			width;
+	int			height;
 	char		*map;
 }				t_board;
 
 typedef struct	s_piece
 {
-	size_t		width;
-	size_t		height;
-	size_t		shape_width;
-	size_t		shape_height;
+	int			width;
+	int			height;
+	int			shape_width;
+	int			shape_height;
 	char		*map;
 }				t_piece;
 
@@ -48,9 +48,9 @@ typedef struct	s_data
 int				get_player_info(char *player_piece, char *opponent_piece);
 int				get_board(char *dimension_line, t_board *board);
 int				get_piece(t_piece *piece);
-void			get_dimensions(char *str, size_t *height, size_t *width);
-int				row_is_empty(char *map, size_t row, size_t width);
-int				col_is_empty(char *map, size_t col, size_t width, size_t hght);
-void			write_next_coordinates(t_data data);
+void			get_dimensions(char *str, int *height, int *width);
+int				row_is_empty(char *map, int row, int width);
+int				col_is_empty(char *map, int col, int width, int hght);
+void			get_next_coordinates(t_data data);
 
 #endif

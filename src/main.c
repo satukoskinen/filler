@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 19:39:25 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/07 01:41:00 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/09 21:45:39 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 void	print_board(t_board board)
 {
-	size_t	i;
-	size_t	j;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (i < board.height)
@@ -54,7 +54,7 @@ int		main(void)
 			return (1);
 		if (!get_piece(&data.piece))
 			return (1);
-		write_next_coordinates(data);
+		get_next_coordinates(data);
 		free(line);
 		free(data.board.map);
 		free(data.piece.map);
