@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 19:39:25 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/09 21:45:39 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/13 22:54:32 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,6 @@
 #include "libft.h"
 #include <stdlib.h>
 #include <unistd.h>
-
-void	print_board(t_board board)
-{
-	int		i;
-	int		j;
-
-	i = 0;
-	while (i < board.height)
-	{
-		j = 0;
-		while (j < board.width)
-		{
-			write(1, &board.map[i * board.width + j], 1);
-			j++;
-		}
-		write(1, "\n", 1);
-		i++;
-	}
-}
 
 int		error(const char *msg)
 {
@@ -44,21 +25,24 @@ int		main(void)
 {
 	char	*line;
 	int		ret;
-	t_data	data;
+	t_board	board;
+	t_piece	piece;
+	char	opponent;
 
-	if (!get_player_info(&data.player_piece, &data.opponent_piece))
+	board.map = NULL;
+	if (!get_player_info(&opponent))
 		return (error("Bad player info\n"));
 	while ((ret = get_next_line(0, &line)) > 0)
 	{
-		if (!get_board(line, &data.board))
+		if (!board.map && !init_board(line, &board))
 			return (1);
-		if (!get_piece(&data.piece))
+		if (!update_board(&board, opponent) || !get_piece(&piece))
 			return (1);
-		get_next_coordinates(data);
+		get_next_coordinates(board, piece, opponent);
 		free(line);
-		free(data.board.map);
-		free(data.piece.map);
+		free(piece.map);
 	}
+	free(board.map);
 	if (ret == -1)
 		return (1);
 	return (0);

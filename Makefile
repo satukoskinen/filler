@@ -6,7 +6,7 @@
 #    By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/02 11:40:44 by skoskine          #+#    #+#              #
-#    Updated: 2021/03/06 22:47:56 by skoskine         ###   ########.fr        #
+#    Updated: 2021/03/13 16:13:38 by skoskine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC = $(addprefix $(SRC_DIR), \
 	get_piece.c \
 	get_next_coordinates.c \
 	helpers.c \
+	debug.c \
 	)
 OBJ = $(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.c=.o))
 HEADER = $(addprefix $(HEADER_DIR), filler.h)

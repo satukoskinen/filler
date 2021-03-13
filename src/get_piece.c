@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 20:49:53 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/10 08:07:00 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/13 12:56:57 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,48 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static void	get_shape_dimensions(t_piece *piece)
-{
-	int		i;
-	int		height;
-	int		width;
+/*
+** static void	get_shape_dimensions(t_piece *piece)
+** {
+** 	int		i;
+** 	int		height;
+** 	int		width;
+**
+** 	height = 0;
+** 	width = 0;
+** 	i = 0;
+** 	while (i < piece->height)
+** 	{
+** 		if (!row_is_empty(piece->map, i, piece->width))
+** 			height++;
+** 		i++;
+** 	}
+** 	i = 0;
+** 	while (i < piece->width)
+** 	{
+** 		if (!col_is_empty(piece->map, i, piece->width, piece->height))
+** 			width++;
+** 		i++;
+** 	}
+** 	piece->shape_height = height;
+** 	piece->shape_width = width;
+** }
+*/
 
-	height = 0;
-	width = 0;
-	i = 0;
-	while (i < piece->height)
-	{
-		if (!row_is_empty(piece->map, i, piece->width))
-			height++;
-		i++;
-	}
-	i = 0;
-	while (i < piece->width)
-	{
-		if (!col_is_empty(piece->map, i, piece->width, piece->height))
-			width++;
-		i++;
-	}
-	piece->shape_height = height;
-	piece->shape_width = width;
+t_2d_index	get_shape_start(t_piece piece)
+{
+	t_2d_index coordinates;
+
+	coordinates.y = 0;
+	while (row_is_empty(piece.map, coordinates.y, piece.width))
+		coordinates.y++;
+	coordinates.x = 0;
+	while (piece.map[coordinates.y * piece.width + coordinates.x] != '*')
+		coordinates.x++;
+	return (coordinates);
 }
 
-static int	add_piece_row(char *map, int 	row, int 	width)
+static int	add_piece_row(char *map, int row, int width)
 {
 	char	*line;
 	int		j;
@@ -83,6 +98,6 @@ int			get_piece(t_piece *piece)
 		i++;
 	}
 	piece->map[piece->height * piece->width] = '\0';
-	get_shape_dimensions(piece);
+	piece->start = get_shape_start(*piece);
 	return (1);
 }
