@@ -6,14 +6,12 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 22:39:58 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/13 23:06:40 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/14 13:17:55 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
-#include <math.h>
-#include <stdio.h>
 
 static int			valid_piece_coordinates(t_2d_index coord, t_board board,
 t_piece piece, char opponent)
@@ -111,8 +109,8 @@ double				get_distance(t_2d_index p1, t_2d_index p2)
 {
 	double	dist;
 
-	dist = (p1.y - p2.y) * (p1.y - p2.y) + (p1.x - p2.x) * (p1.x - p2.x);
-	return (sqrt(dist));
+	dist = (p1.y - p2.y) * (p1.y - p2.y) +	 (p1.x - p2.x) * (p1.x - p2.x);
+	return (ft_sqrt(dist));
 }
 
 double				dist_to_opponent(t_2d_index opponent, t_2d_index start,
