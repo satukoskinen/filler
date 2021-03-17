@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 19:39:25 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/17 10:07:38 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/17 10:59:50 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int		main(void)
 		free(piece.map);
 	}
 	free(board.map);
+	free(board.heatmap);
 	if (ret == -1)
 		return (error("Error in reading input\n"));
 	return (0);

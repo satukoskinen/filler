@@ -6,42 +6,14 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 09:52:04 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/17 10:07:56 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/17 11:12:44 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
 
-t_2d_index		get_opponent_coordinates(t_board board, char opponent)
-{
-	int			i;
-	int			j;
-	t_2d_index	coordinates;
-
-	coordinates.y = 0;
-	coordinates.x = 0;
-	i = 0;
-	while (i < board.height)
-	{
-		j = 0;
-		while (j < board.width)
-		{
-			if (ft_toupper(board.map[i * board.width + j]) == opponent)
-			{
-				coordinates.y = i;
-				coordinates.x = j;
-			}
-			if (board.map[i * board.width + j] == ft_tolower(opponent))
-				return (coordinates);
-			j++;
-		}
-		i++;
-	}
-	return (coordinates);
-}
-
-double			get_distance(t_2d_index p1, t_2d_index p2)
+double	get_distance(t_2d_index p1, t_2d_index p2)
 {
 	double		dist;
 
@@ -49,7 +21,7 @@ double			get_distance(t_2d_index p1, t_2d_index p2)
 	return (ft_sqrt(dist));
 }
 
-double			dist_to_opponent(t_2d_index opponent, t_2d_index start,
+double	dist_to_opponent(t_2d_index opponent, t_2d_index start,
 t_piece piece)
 {
 	double		ret;
@@ -73,4 +45,31 @@ t_piece piece)
 		i++;
 	}
 	return (ret);
+}
+
+void	get_closest_to_latest(t_board board, t_piece piece, char opp_char,
+t_2d_index opp)
+{
+	t_2d_index	tmp;
+	t_2d_index	next;
+	int			is_next_set;
+	int			i;
+
+	next = set_coordinates(0, 0);
+	is_next_set = 0;
+	i = 0;
+	while (board.map[i])
+	{
+		tmp = set_coordinates(i / board.width - piece.start.y,
+		i % board.width - piece.start.x);
+		if (valid_piece_coordinates(tmp, board, piece, opp_char))
+		{
+			if (!is_next_set || dist_to_opponent(opp, tmp, piece) <
+			dist_to_opponent(opp, next, piece))
+				next = tmp;
+			is_next_set = 1;
+		}
+		i++;
+	}
+	ft_printf("%d %d\n", next.y, next.x);
 }

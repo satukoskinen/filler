@@ -6,14 +6,14 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 22:39:58 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/17 10:07:32 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/17 11:20:22 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
 
-static int	valid_piece_coordinates(t_2d_index coord, t_board board,
+int			valid_piece_coordinates(t_2d_index coord, t_board board,
 t_piece piece, char opponent)
 {
 	int			i;
@@ -64,7 +64,7 @@ static int	heatmap_sum(t_board board, t_2d_index start, t_piece piece)
 	return (sum);
 }
 
-void		get_next_coordinates(t_board board, t_piece piece, char opp_char)
+void		get_closest_to_opponent(t_board board, t_piece piece, char opp_char)
 {
 	t_2d_index	tmp;
 	t_2d_index	next;
@@ -88,4 +88,36 @@ void		get_next_coordinates(t_board board, t_piece piece, char opp_char)
 		i++;
 	}
 	ft_printf("%d %d\n", next.y, next.x);
+}
+
+void		get_first_valid(t_board board, t_piece piece, char opp_char)
+{
+	t_2d_index	tmp;
+	int			i;
+
+	tmp = set_coordinates(0, 0);
+	i = 0;
+	while (board.map[i])
+	{
+		tmp = set_coordinates(i / board.width - piece.start.y,
+		i % board.width - piece.start.x);
+		if (valid_piece_coordinates(tmp, board, piece, opp_char))
+			break ;
+		i++;
+	}
+	ft_printf("%d %d\n", tmp.y, tmp.x);
+}
+
+void		get_next_coordinates(t_board board, t_piece piece, char opp_char)
+{
+	t_2d_index opp;
+
+	opp = get_opponent_coordinates(board, opp_char);
+	if (board.map[opp.y * board.width + opp.x] == ft_tolower(opp_char))
+	{
+		update_heatmap(&board, opp_char);
+		get_closest_to_opponent(board, piece, opp_char);
+	}
+	else
+		get_first_valid(board, piece, opp_char);
 }

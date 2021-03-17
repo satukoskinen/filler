@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 20:51:35 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/17 09:13:44 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/17 11:18:34 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libft.h"
 #include <stdlib.h>
 
-static void	fill_heatmap(t_board *board, char opponent, int i, int value)
+void		fill_heatmap(t_board *board, char opponent, int i, int value)
 {
 	if (ft_toupper(board->map[i]) == opponent)
 	{
@@ -39,7 +39,7 @@ static void	fill_heatmap(t_board *board, char opponent, int i, int value)
 		fill_heatmap(board, opponent, i + board->width, value + 1);
 }
 
-static void	update_heatmap(t_board *board, char opponent)
+void		update_heatmap(t_board *board, char opponent)
 {
 	int		i;
 
@@ -98,7 +98,6 @@ int			update_board(t_board *board, char opponent)
 		}
 		i++;
 	}
-	update_heatmap(board, opponent);
 	return (1);
 }
 

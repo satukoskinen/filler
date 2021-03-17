@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 21:46:12 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/17 09:11:06 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/17 10:58:53 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,34 @@ void		get_dimensions(char *str, int *height, int *width)
 	while (ft_isdigit(str[i]) && str[i])
 		i++;
 	*width = ft_atoi(&str[i]);
+}
+
+t_2d_index	get_opponent_coordinates(t_board board, char opponent)
+{
+	int			i;
+	int			j;
+	t_2d_index	coordinates;
+
+	coordinates.y = 0;
+	coordinates.x = 0;
+	i = 0;
+	while (i < board.height)
+	{
+		j = 0;
+		while (j < board.width)
+		{
+			if (ft_toupper(board.map[i * board.width + j]) == opponent)
+			{
+				coordinates.y = i;
+				coordinates.x = j;
+			}
+			if (board.map[i * board.width + j] == ft_tolower(opponent))
+				return (coordinates);
+			j++;
+		}
+		i++;
+	}
+	return (coordinates);
 }
 
 int			row_is_empty(char *map, int row, int width)
