@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 22:39:58 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/17 11:20:22 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/17 12:10:30 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,20 +19,20 @@ t_piece piece, char opponent)
 	int			i;
 	int			overlap;
 	char		cell;
+	t_2d_index	map_coord;
 
-	i = 0;
 	overlap = 0;
+	i = piece.start.y * piece.width + piece.start.x;
 	while (piece.map[i])
 	{
 		if (piece.map[i] == '*')
 		{
-			if (coord.y + i / piece.width >= board.height ||
-			coord.x + i % piece.width >= board.width ||
-			coord.y + i / piece.width < 0 ||
-			coord.x + i % piece.width < 0)
+			map_coord.y = coord.y + i / piece.width;
+			map_coord.x = coord.x + i % piece.width;
+			if (map_coord.y < 0 || map_coord.y >= board.height ||
+			map_coord.x < 0 || map_coord.x >= board.width)
 				return (0);
-			cell = board.map[(coord.y + i / piece.width) * board.width +
-			coord.x + i % piece.width];
+			cell = board.map[map_coord.y * board.width + map_coord.x];
 			if (cell != '.' && ft_toupper(cell) != opponent)
 				overlap++;
 			if (overlap == 2 || ft_toupper(cell) == opponent)
@@ -49,7 +49,7 @@ static int	heatmap_sum(t_board board, t_2d_index start, t_piece piece)
 	int			sum;
 	t_2d_index	map_coord;
 
-	i = piece.start.y * piece.width + piece.start.x + 1;
+	i = piece.start.y * piece.width + piece.start.x;
 	sum = 0;
 	while (piece.map[i])
 	{
@@ -110,14 +110,23 @@ void		get_first_valid(t_board board, t_piece piece, char opp_char)
 
 void		get_next_coordinates(t_board board, t_piece piece, char opp_char)
 {
-	t_2d_index opp;
+	t_2d_index	opp;
+	static int	opponent_quit;
 
-	opp = get_opponent_coordinates(board, opp_char);
-	if (board.map[opp.y * board.width + opp.x] == ft_tolower(opp_char))
-	{
-		update_heatmap(&board, opp_char);
-		get_closest_to_opponent(board, piece, opp_char);
-	}
-	else
+	if (opponent_quit)
 		get_first_valid(board, piece, opp_char);
+	else if (!opponent_quit)
+	{
+		opp = get_opponent_coordinates(board, opp_char);
+		if (board.map[opp.y * board.width + opp.x] == ft_tolower(opp_char))
+		{
+			update_heatmap(&board, opp_char);
+			get_closest_to_opponent(board, piece, opp_char);
+		}
+		else
+		{
+			opponent_quit = 1;
+			get_first_valid(board, piece, opp_char);
+		}
+	}
 }
