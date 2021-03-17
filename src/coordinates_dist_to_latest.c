@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 09:52:04 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/17 11:12:44 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/17 12:23:05 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_piece piece)
 	double		ret;
 	double		dist;
 	int			i;
-	t_2d_index	map_coordinates;
+	t_2d_index	map_coord;
 
 	ret = get_distance(opponent, set_coordinates(start.y + piece.start.y,
 	start.x + piece.start.x));
@@ -36,9 +36,9 @@ t_piece piece)
 	{
 		if (piece.map[i] == '*')
 		{
-			map_coordinates.y = start.y + i / piece.width;
-			map_coordinates.x = start.x + i % piece.width;
-			dist = get_distance(opponent, map_coordinates);
+			map_coord.y = start.y + i / piece.width;
+			map_coord.x = start.x + i % piece.width;
+			dist = get_distance(opponent, map_coord);
 			if (dist < ret)
 				ret = dist;
 		}

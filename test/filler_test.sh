@@ -12,9 +12,9 @@ logfile="test_log"
 ##############
 
 play () {
-	map=$1
-	p1=$2
-	p2=$3
+	local map=$1
+	local p1=$2
+	local p2=$3
 
 	for i in {1..10}
 	do
@@ -48,6 +48,7 @@ play () {
 			cat filler.trace >> $logfile
 		fi
 	done
+	rm output error result
 }
 
 ##############
