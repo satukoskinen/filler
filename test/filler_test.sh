@@ -2,9 +2,9 @@
 
 ### CONFIG ###
 
-player="skoskine.filler"
+player="./skoskine.filler"
 opponent_dir="resources/players/*"
-#opponent_dir="./x.filler"
+#opponent_dir="resources/players/ksuomala.filler"
 map_dir="resources/maps/*"
 vm="resources/filler_vm_old"
 logfile="test_log"
@@ -37,7 +37,7 @@ then
 				grep "Segfault" output > error
 				if [ -s error ]
 				then
-					filename="log_${map}_${p1}_${p2}_${i}"
+					filename="log_${i}"
 					cat output > $filename
 					printf "\nsegfault: see $filename\n"
 					printf "map $map p1 $p1 p2 $p2\n" >> $logfile
@@ -64,7 +64,7 @@ then
 				grep "Segfault" output > error
 				if [ -s error ]
 				then
-					filename="log_${map}_${p1}_${p2}_${i}"
+					filename="log_${i}"
 					cat output > $filename
 					printf "\nsegfault: see $filename\n"
 					printf "\n./$vm -f $map -p1 $p1 -p2 $p2\n" >> $logfile
@@ -103,7 +103,7 @@ then
 			grep "Segfault" output > error
 			if [ -s error ]
 			then
-				filename="log_${map}_${player}_${i}"
+				filename="log_${i}"
 				cat output > $filename
 				printf "\nsegfault: see $filename\n"
 				printf "\n./$vm -f $map -p1 $player\n" >> $logfile
