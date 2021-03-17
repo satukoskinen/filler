@@ -6,13 +6,50 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 20:51:35 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/13 23:02:35 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/17 09:13:44 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
 #include <stdlib.h>
+
+static void	fill_heatmap(t_board *board, char opponent, int i, int value)
+{
+	if (ft_toupper(board->map[i]) == opponent)
+	{
+		board->heatmap[i] = 1;
+		value = 1;
+	}
+	else
+		board->heatmap[i] = value;
+	if ((i + 1) % board->width != 0 &&
+	(board->heatmap[i + 1] == 0 || board->heatmap[i + 1] > value + 1))
+		fill_heatmap(board, opponent, i + 1, value + 1);
+	if (i % board->width != 0 &&
+	(board->heatmap[i - 1] == 0 || board->heatmap[i - 1] > value + 1))
+		fill_heatmap(board, opponent, i - 1, value + 1);
+	if (i - board->width >= 0 &&
+	(board->heatmap[i - board->width] == 0 ||
+	board->heatmap[i - board->width] > value + 1))
+		fill_heatmap(board, opponent, i - board->width, value + 1);
+	if (i + board->width < board->width * board->height &&
+	(board->heatmap[i + board->width] == 0 ||
+	board->heatmap[i + board->width] > value + 1))
+		fill_heatmap(board, opponent, i + board->width, value + 1);
+}
+
+static void	update_heatmap(t_board *board, char opponent)
+{
+	int		i;
+
+	ft_memset((void*)board->heatmap, 0,
+	board->height * board->width * sizeof(int));
+	i = 0;
+	while (ft_toupper(board->map[i]) != opponent)
+		i++;
+	fill_heatmap(board, opponent, i, 1);
+}
 
 static int	update_board_row(char *map, int row, int width, char opponent)
 {
@@ -61,6 +98,7 @@ int			update_board(t_board *board, char opponent)
 		}
 		i++;
 	}
+	update_heatmap(board, opponent);
 	return (1);
 }
 
@@ -72,59 +110,8 @@ int			init_board(char *dimension_line, t_board *board)
 		return (0);
 	ft_memset((void*)board->map, '.', board->height * board->width);
 	board->map[board->height * board->width] = '\0';
+	if (!(board->heatmap = (int*)malloc(sizeof(int) *
+	(board->height * board->width))))
+		return (0);
 	return (1);
 }
-
-/*
-** static int	add_board_row(char *map, int row, int width)
-** {
-** 	char	*line;
-** 	int		offset;
-** 	int		j;
-**
-** 	if (get_next_line(0, &line) != 1)
-** 		return (0);
-** 	offset = 0;
-** 	while (!ft_strchr(".oOxX", line[offset]))
-** 		offset++;
-** 	j = 0;
-** 	while (j < width)
-** 	{
-** 		if (!line[offset + j])
-** 			return (0);
-** 		map[row * width + j] = line[offset + j];
-** 		j++;
-** 	}
-** 	free(line);
-** 	return (1);
-** }
-**
-** int			get_board(char *dimension_line, t_board *board)
-** {
-** 	char	*line;
-** 	int		i;
-**
-** 	get_dimensions(dimension_line, &board->height, &board->width);
-** 	if (!(board->map = (char*)malloc(sizeof(char) *
-** 	(board->height * board->width + 1))))
-** 		return (0);
-** 	if (get_next_line(0, &line) != 1)
-** 	{
-** 		ft_strdel(&board->map);
-** 		return (0);
-** 	}
-** 	free(line);
-** 	i = 0;
-** 	while (i < board->height)
-** 	{
-** 		if (!add_board_row(board->map, i, board->width))
-** 		{
-** 			ft_strdel(&board->map);
-** 			return (0);
-** 		}
-** 		i++;
-** 	}
-** 	board->map[board->height * board->width] = '\0';
-** 	return (1);
-** }
-*/

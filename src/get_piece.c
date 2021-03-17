@@ -6,41 +6,13 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 20:49:53 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/13 12:56:57 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/16 16:00:49 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
 #include <stdlib.h>
-
-/*
-** static void	get_shape_dimensions(t_piece *piece)
-** {
-** 	int		i;
-** 	int		height;
-** 	int		width;
-**
-** 	height = 0;
-** 	width = 0;
-** 	i = 0;
-** 	while (i < piece->height)
-** 	{
-** 		if (!row_is_empty(piece->map, i, piece->width))
-** 			height++;
-** 		i++;
-** 	}
-** 	i = 0;
-** 	while (i < piece->width)
-** 	{
-** 		if (!col_is_empty(piece->map, i, piece->width, piece->height))
-** 			width++;
-** 		i++;
-** 	}
-** 	piece->shape_height = height;
-** 	piece->shape_width = width;
-** }
-*/
 
 t_2d_index	get_shape_start(t_piece piece)
 {

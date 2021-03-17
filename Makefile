@@ -6,7 +6,7 @@
 #    By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/02 11:40:44 by skoskine          #+#    #+#              #
-#    Updated: 2021/03/13 16:13:38 by skoskine         ###   ########.fr        #
+#    Updated: 2021/03/17 09:54:20 by skoskine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC = $(addprefix $(SRC_DIR), \
 	get_board.c \
 	get_piece.c \
 	get_next_coordinates.c \
+	coordinates_dist_to_latest.c \
 	helpers.c \
 	debug.c \
 	)

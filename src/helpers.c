@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 21:46:12 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/13 16:03:38 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/17 09:11:06 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,6 @@ int			col_is_empty(char *map, int col, int width, int height)
 		i++;
 	}
 	return (1);
-}
-
-void		write_coordinates(int y, int x, int fd)
-{
-	ft_putnbr_fd(y, fd);
-	ft_putstr_fd(" ", fd);
-	ft_putnbr_fd(x, fd);
-	ft_putstr_fd("\n", fd);
 }
 
 t_2d_index	set_coordinates(int y, int x)
