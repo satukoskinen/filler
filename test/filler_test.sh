@@ -4,7 +4,7 @@
 
 player="./skoskine.filler"
 opponent_dir="resources/players/*"
-#opponent_dir="resources/players/ksuomala.filler"
+#opponent_dir="resources/players/x.filler"
 map_dir="resources/maps/*"
 vm="resources/filler_vm_old"
 logfile="test_log"
@@ -48,7 +48,7 @@ play () {
 			cat filler.trace >> $logfile
 		fi
 	done
-	rm output error result
+	rm output error result filler.trace
 }
 
 ##############
@@ -107,7 +107,7 @@ then
 	done
 fi
 
-rm -f output result error
+rm -f output result error filler.trace
 
-# Generate maps of different sizes with random starting points,
-# otherwise as above
+## Generate maps of different sizes with random starting points,
+## otherwise as above
