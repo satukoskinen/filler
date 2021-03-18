@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 20:51:35 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/17 11:18:34 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/18 16:41:15 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static int	update_board_row(char *map, int row, int width, char opponent)
 	if (get_next_line(0, &line) != 1)
 		return (0);
 	offset = 0;
-	while (!ft_strchr(".oOxX", line[offset]))
+	while (!ft_strchr(".oOxX", line[offset]) && line[offset])
 		offset++;
 	j = 0;
 	while (j < width)
@@ -104,6 +104,8 @@ int			update_board(t_board *board, char opponent)
 int			init_board(char *dimension_line, t_board *board)
 {
 	get_dimensions(dimension_line, &board->height, &board->width);
+	if (!board->height || !board->width)
+		return (1);
 	if (!(board->map = (char*)malloc(sizeof(char) *
 	(board->height * board->width + 1))))
 		return (0);

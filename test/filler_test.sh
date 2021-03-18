@@ -6,6 +6,7 @@ player="./skoskine.filler"
 opponent_dir="resources/players/*"
 #opponent_dir="resources/players/x.filler"
 map_dir="resources/maps/*"
+err_dir="test/error_files/*"
 vm="resources/filler_vm_old"
 logfile="test_log"
 
@@ -18,7 +19,7 @@ play () {
 
 	for i in {1..10}
 	do
-		./$vm -f $map -p1 $p1 -p2 $p2 > output
+		./$vm -f $map -p1 $p1 -p2 $p2 > output 2>&1
 		grep "Segfault" output > error
 		if [ -s error ]
 		then
@@ -53,10 +54,23 @@ play () {
 
 ##############
 
+printf "testing $player...\n\n"
+
+## Test error handling
+
+read -n 1 -p "test error handling? [y/n] " ret
+if [ $ret != "n" ]
+then
+	for testfile in $err_dir
+	do
+	printf "\ntest file ${testfile}:\n"
+		$player < $testfile
+	done
+fi
+
 ## Test with maps provided in resources:
 
 rm -f $logfile
-printf "testing $player...\n"
 
 # Multi-player: as p1 and p2 against all other players,
 # each repeated 10 times
@@ -92,7 +106,7 @@ then
 		printf "\nmap $map:\n"
 		for i in {1..10}
 		do
-			./$vm -f $map -p1 $player > output
+			./$vm -f $map -p1 $player > output 2>&1
 			grep "Segfault" output > error
 			if [ -s error ]
 			then
