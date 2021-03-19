@@ -6,7 +6,7 @@
 #    By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/02 11:40:44 by skoskine          #+#    #+#              #
-#    Updated: 2021/03/17 09:54:20 by skoskine         ###   ########.fr        #
+#    Updated: 2021/03/19 07:25:39 by skoskine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,23 +19,26 @@ HEADER_DIR = include/
 SRC = $(addprefix $(SRC_DIR), \
 	main.c \
 	get_player_info.c \
-	get_board.c \
+	init_board.c \
+	update_board.c \
 	get_piece.c \
-	get_next_coordinates.c \
+	find_next_coordinates.c \
+	update_heatmap.c \
 	coordinates_dist_to_latest.c \
 	helpers.c \
 	debug.c \
 	)
+
 OBJ = $(subst $(SRC_DIR), $(OBJ_DIR), $(SRC:.c=.o))
 HEADER = $(addprefix $(HEADER_DIR), filler.h)
 
 LIBFT = libft/libft.a
 
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 CPPFLAGS = -I libft -I include
 LDLIBS = -lft
-LDFLAGS = -L libft
+LDFLAGS = -L libft -fsanitize=address
 
 all: $(NAME)
 

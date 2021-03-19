@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:03:24 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/17 09:10:40 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/19 07:43:01 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-void		print_heatmap(int *map, int width, int height, int fd)
+static void	print_heatmap(int *map, int width, int height, int fd)
 {
 	int		i;
 	int		j;
@@ -34,7 +34,7 @@ void		print_heatmap(int *map, int width, int height, int fd)
 	}
 }
 
-void		print_map(char *map, int width, int height, int fd)
+static void	print_map(char *map, int width, int height, int fd)
 {
 	int		i;
 	int		j;
