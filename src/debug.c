@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/13 16:03:24 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/19 07:43:01 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/19 21:38:55 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ t_2d_index next)
 	print_map(board.map, board.width, board.height, fd);
 	print_heatmap(board.heatmap, board.width, board.height, fd);
 	ft_dprintf(fd, "%d %d\n", piece.height, piece.width);
-	print_map(piece.map, piece.width, piece.height, fd);
+//	print_map(piece.map, piece.width, piece.height, fd);
 	ft_putstr_fd("opponent coordinates: ", fd);
 	ft_dprintf(fd, "%d %d\n", opponent.y, opponent.x);
 	ft_putstr_fd("next piece coordinates: ", fd);

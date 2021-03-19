@@ -6,13 +6,14 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 09:52:04 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/17 12:23:05 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/19 21:45:15 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "filler.h"
 #include "libft.h"
 
+/*
 double	get_distance(t_2d_index p1, t_2d_index p2)
 {
 	double		dist;
@@ -73,3 +74,4 @@ t_2d_index opp)
 	}
 	ft_printf("%d %d\n", next.y, next.x);
 }
+*/

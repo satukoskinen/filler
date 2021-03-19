@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 19:39:25 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/19 08:29:52 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/19 21:37:13 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	free_resources(t_board board, t_piece piece, char *line)
 {
 	free(board.map);
 	free(board.heatmap);
-	free(piece.map);
+	free(piece.coord);
 	free(line);
 }
 
@@ -49,7 +49,7 @@ int			main(void)
 		if (!update_board(&board, opponent) || !get_piece(&piece))
 			break ;
 		find_next_coordinates(board, piece, opponent);
-		ft_strdel(&piece.map);
+		ft_memdel((void**)&piece.coord);
 	}
 	free_resources(board, piece, line);
 	if (ret != 0)

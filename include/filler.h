@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 20:22:31 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/19 07:26:17 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/19 21:19:38 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ typedef struct	s_piece
 {
 	int			width;
 	int			height;
-	t_2d_index	start;
-	char		*map;
+	t_2d_index	*coord;
+	int			count;
 }				t_piece;
 
 int				get_player_info(char *opponent_piece);
