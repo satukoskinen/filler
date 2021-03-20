@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 22:39:58 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/19 21:47:28 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/20 09:36:41 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	heatmap_sum(t_board board, t_2d_index start, t_piece piece)
 	return (sum);
 }
 
-void		get_closest_to_opponent(t_board board, t_piece piece, char opp_char)
+t_2d_index	get_closest_to_opponent(t_board board, t_piece piece, char opp_char)
 {
 	t_2d_index	tmp;
 	t_2d_index	next;
@@ -81,13 +81,13 @@ void		get_closest_to_opponent(t_board board, t_piece piece, char opp_char)
 		}
 		i++;
 	}
-	ft_printf("%d %d\n", next.y, next.x);
+	return (next);
 }
 
-void		get_first_valid(t_board board, t_piece piece, char opp_char)
+t_2d_index	get_first_valid(t_board board, t_piece piece, char opp_char)
 {
-	t_2d_index	next;
 	t_2d_index	tmp;
+	t_2d_index	next;
 	int			i;
 
 	next = set_coordinates(0, 0);
@@ -103,16 +103,21 @@ void		get_first_valid(t_board board, t_piece piece, char opp_char)
 		}
 		i++;
 	}
-	ft_printf("%d %d\n", next.y, next.x);
+	return (next);
 }
 
 void		find_next_coordinates(t_board board, t_piece piece, char opp_char)
 {
+	t_2d_index	next;
+
 	if (board.opponent_plays)
 	{
 		update_heatmap(&board, opp_char);
-		get_closest_to_opponent(board, piece, opp_char);
+		next = get_closest_to_opponent(board, piece, opp_char);
 	}
 	else
-		get_first_valid(board, piece, opp_char);
+		next = get_first_valid(board, piece, opp_char);
+	if (DEBUG)
+		print_debug(board, piece, next);
+	ft_printf("%d %d\n", next.y, next.x);
 }

@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 19:39:25 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/19 21:37:13 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/20 08:53:44 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int			main(void)
 
 	board.map = NULL;
 	board.heatmap = NULL;
+	init_debug_file();
 	if (!get_player_info(&opponent))
 		return (error("Bad player info\n"));
 	while ((ret = get_next_line(0, &line)) > 0)
