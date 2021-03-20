@@ -26,7 +26,13 @@ play () {
 			filename="log_${i}"
 			cat output > $filename
 			printf "\nsegfault: see $filename\n"
-			printf "map $map p1 $p1 p2 $p2\n" >> $logfile
+			printf "\n./$vm -f $map -p1 $p1 -p2 $p2\n" >> $logfile
+			cat filler.trace >> $logfile
+		fi
+		grep "error" output > error
+		if [ -s error ]
+		then
+			printf "\n./$vm -f $map -p1 $p1 -p2 $p2\n" >> $logfile
 			cat filler.trace >> $logfile
 		fi
 		grep "fin" output > result
@@ -75,6 +81,7 @@ rm -f $logfile
 # Multi-player: as p1 and p2 against all other players,
 # each repeated 10 times
 
+printf "\n"
 read -n 1 -p "test multiplayer? [y/n] " ret
 if [ $ret != "n" ]
 then
