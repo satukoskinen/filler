@@ -6,7 +6,7 @@
 #    By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/03/02 11:40:44 by skoskine          #+#    #+#              #
-#    Updated: 2021/03/19 21:38:28 by skoskine         ###   ########.fr        #
+#    Updated: 2021/03/23 11:36:43 by skoskine         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,10 +34,10 @@ HEADER = $(addprefix $(HEADER_DIR), filler.h)
 LIBFT = libft/libft.a
 
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror #-fsanitize=address
 CPPFLAGS = -I libft -I include
 LDLIBS = -lft
-LDFLAGS = -L libft -fsanitize=address
+LDFLAGS = -L libft #-fsanitize=address
 
 all: $(NAME)
 
