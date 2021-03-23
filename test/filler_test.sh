@@ -62,7 +62,7 @@ play () {
 
 printf "testing $player...\n\n"
 
-## Test error handling
+## 1) Test error handling
 
 read -n 1 -p "test error handling? [y/n] " ret
 if [ $ret != "n" ]
@@ -74,11 +74,11 @@ then
 	done
 fi
 
-## Test with maps provided in resources:
+## 2) Test with maps provided in resources:
 
 rm -f $logfile
 
-# Multi-player: as p1 and p2 against all other players,
+# 2.1) Multi-player: as p1 and p2 against all other players,
 # each repeated 10 times
 
 printf "\n"
@@ -101,7 +101,7 @@ then
 	done
 fi
 
-# Single player: each map 10 times
+# 2.2) Single player: each map 10 times
 
 printf "\n"
 read -n 1 -p "test single player? [y/n] " ret
@@ -130,5 +130,13 @@ fi
 
 rm -f output result error filler.trace
 
-## Generate maps of different sizes with random starting points,
-## otherwise as above
+## (Generate maps of different sizes with random starting points)
+
+## 3) Test with valgrind
+
+printf "\n"
+read -n 1 -p "test with valgrind? [y/n] " ret
+if [ $ret != "n" ]
+then
+	valgrind --leak-check=full --track-origins=yes $player < test/test_input_1
+fi
