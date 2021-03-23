@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/17 09:52:04 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/20 09:37:38 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/23 13:47:38 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ t_piece piece)
 	return (ret);
 }
 
-t_2d_index		get_closest_to_latest(t_board board, t_piece piece,
-char opp_char, t_2d_index opp)
+t_2d_index		get_closest_to_latest(t_board *board, t_piece piece,
+t_2d_index opp)
 {
 	t_2d_index	tmp;
 	t_2d_index	next;
@@ -55,11 +55,11 @@ char opp_char, t_2d_index opp)
 	next = set_coordinates(0, 0);
 	is_next_set = 0;
 	i = 0;
-	while (board.map[i])
+	while (board->map[i])
 	{
-		tmp = set_coordinates(i / board.width - piece.coord[0].y,
-		i % board.width - piece.coord[0].x);
-		if (valid_piece_coordinates(tmp, board, piece, opp_char))
+		tmp = set_coordinates(i / board->width - piece.coord[0].y,
+		i % board->width - piece.coord[0].x);
+		if (valid_piece_coordinates(tmp, board, piece))
 		{
 			if (!is_next_set || dist_to_opponent(opp, tmp, piece) <
 			dist_to_opponent(opp, next, piece))

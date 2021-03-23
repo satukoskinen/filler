@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/18 20:13:55 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/19 08:14:59 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/23 13:43:20 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static int	update_board_row(t_board *board, char *line, int row, char opp)
 	return (1);
 }
 
-int			update_board(t_board *board, char opp)
+int			update_board(t_board *board)
 {
 	char	*line;
 	int		i;
@@ -62,7 +62,7 @@ int			update_board(t_board *board, char opp)
 	{
 		if (!(get_next_line(0, &line)))
 			break ;
-		if (!update_board_row(board, line, i, opp))
+		if (!update_board_row(board, line, i, board->opponent))
 			break ;
 		free(line);
 		i++;

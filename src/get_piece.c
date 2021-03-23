@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/06 20:49:53 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/20 09:38:08 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/22 19:51:20 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int			get_piece(t_piece *piece)
 		return (0);
 	get_dimensions(line, &piece->height, &piece->width);
 	free(line);
-	if (!piece->height || !piece->width)
+	if (piece->height <= 0 || piece->width <= 0)
 		return (0);
 	if (!(piece->coord = (t_2d_index*)malloc(sizeof(t_2d_index) *
 	(piece->height * piece->width))))

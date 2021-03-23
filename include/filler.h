@@ -6,7 +6,7 @@
 /*   By: skoskine <skoskine@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/02 20:22:31 by skoskine          #+#    #+#             */
-/*   Updated: 2021/03/20 09:48:14 by skoskine         ###   ########.fr       */
+/*   Updated: 2021/03/23 13:46:56 by skoskine         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,12 @@ typedef struct	s_board
 {
 	int			width;
 	int			height;
+	int			size;
 	char		*map;
 	int			*heatmap;
 	int			opponent_plays;
+	char		opponent;
+	char		player;
 }				t_board;
 
 typedef struct	s_piece
@@ -40,21 +43,19 @@ typedef struct	s_piece
 	int			count;
 }				t_piece;
 
-int				get_player_info(char *opponent_piece);
+int				get_player_info(char *opponent, char *player);
 int				init_board(char *dimension_line, t_board *board);
-int				update_board(t_board *board, char opponent);
+int				update_board(t_board *board);
 int				get_piece(t_piece *piece);
 void			get_dimensions(char *str, int *height, int *width);
-void			find_next_coordinates(t_board board, t_piece piece,
-				char opp_char);
-void			update_heatmap(t_board *board, char opponent);
-int				valid_piece_coordinates(t_2d_index coord, t_board board,
-				t_piece piece, char opponent);
-t_2d_index		get_first_valid(t_board board, t_piece piece, char opp_char);
-t_2d_index		get_closest_to_opponent(t_board board, t_piece piece,
-				char opp_char);
+void			find_next_coordinates(t_board *board, t_piece piece);
+void			update_heatmap(t_board *board);
+int				valid_piece_coordinates(t_2d_index coord, t_board *board,
+				t_piece piece);
+t_2d_index		get_first_valid(t_board *board, t_piece piece);
+t_2d_index		get_closest_to_opponent(t_board *board, t_piece piece);
 t_2d_index		get_closest_to_latest(t_board board, t_piece piece,
-				char opp_char, t_2d_index opp);
+				t_2d_index opp);
 t_2d_index		get_opponent_coordinates(t_board board, char opponent);
 t_2d_index		set_coordinates(int y, int x);
 int				row_is_empty(char *map, int row, int width);
