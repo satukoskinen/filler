@@ -114,6 +114,12 @@ then
 		for i in {1..10}
 		do
 			./$vm -f $map -p1 $player > output 2>&1
+			grep "error" output > error
+			if [ -s error ]
+			then
+				printf "\n./$vm -f $map -p1 $p1 -p2 $p2\n" >> $logfile
+				cat filler.trace >> $logfile
+			fi
 			grep "Segfault" output > error
 			if [ -s error ]
 			then
